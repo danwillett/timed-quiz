@@ -18,8 +18,8 @@
         <ul>
 
             <!-- will dynamically add to these sections as the quiz progresses -->
-            <li>Current Score: </li>
-            <li>Time Remaing: </li>
+            <li>Current Score: <span id="score"></span></li>
+            <li>Time Remaining: <span id="time"></span></li>
         </ul>
     </header>
 
@@ -30,15 +30,22 @@
         <!-- h1 will disappear once quiz starts -->
         <h1>Welcome to My Quiz!</h1> 
         <!-- h2 will filled with each quiz question -->
-        <h2 class="question">How well you really know Dan (me)?</h2>
+        <h2 id="question">How well you really know Dan (me)?</h2>
         <!-- directions will disappear when quiz starts -->
-        <p class="instructions">Hi friends and Bootcamp graders! Welcome to the test that tests how much you really know about me.
+        <p id="instructions">Hi friends and Bootcamp graders! Welcome to the test that tests how much you really know about me.
             This is a timed quiz. You have 1 minutes to answer as many multiple choice questions about my life as you can, wracking up points along the way. Correct answers are worth 5pts.
             If you answer a question incorrectly, you will lose 5 seconds on the clock, so try to be right!
             Clicking the start button will begin the quiz and timer. Good luck! And I hope to see your name on the high score list!
         </p>
+        <!-- answers -->
+        <ol>
+            <li class = "answers"><button id="a" data-correct="false"></button></li>
+            <li class = "answers"><button id="b" data-correct="false"></button></li>
+            <li class = "answers"><button id="c" data-correct="false"></button></li>
+            <li class = "answers"><button id="d" data-correct="false"></button></li>
+        </ol>
         <!-- button begins the quiz, but then will become the submit answer button -->
-        <button class="start-button" data-function="start">Start!</button>
+        <button id="start-button" data-function="start">Start!</button>
     </main>
 </body>
 <script src="./assets/js/script.js"></script>
