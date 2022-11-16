@@ -64,3 +64,7 @@ h2 {
     height: 50px;
     margin: 0 auto;
 }
+
+.answer-options, .submit-score {
+    display:none;
+}
