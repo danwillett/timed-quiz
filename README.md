@@ -6,7 +6,7 @@ This project was created as a way to review JavaScript. This application generat
 
 ## Installation
 
-No installation steps are necessary. To take the quiz, you need a working web browser. Navigate to this link to play: _______.
+No installation steps are necessary. To take the quiz, you need a working web browser. Navigate to this link to play: https://danwillett.github.io/timed-quiz/
 
 ## Usage
 

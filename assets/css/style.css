@@ -1,3 +1,4 @@
+/* assigns font family to all webpage */
 * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
@@ -5,7 +6,7 @@
 body {
     width: 100vw;
     display: block;
-    margin: 20px;
+    margin: 30px 20px;
 }
 
 header {
@@ -14,6 +15,7 @@ header {
     height: fit-content;
 }
 
+/* makes header content flex elements positioned in a row */
 header ul {
     text-decoration: none;
     display: flex;
@@ -26,7 +28,7 @@ header li {
     margin: 10px 0;
 }
 
-
+/* makes the remaining webpage objects flexboxes, centered on the page horizontally */
 main {
     padding: 5% 15%;
     display: flex;
@@ -64,13 +66,12 @@ h2 {
     margin: 0 auto;
 }
 
-.answer-options {
+.answer-options { 
     display:none;
     flex-direction: column;
     width: 100%;
     height: fit-content;
-    justify-content: center;
-    
+    justify-content: center; 
 }
 
 
@@ -79,10 +80,11 @@ h2 {
     padding: 5px;
     width: 100%;
 }
+/* when hovering over answer options, they darken so the user knows which one they are about to click */
 .answers:hover {
     filter: brightness(75%);
 }
-/* at the start, the score submission and answer options are hidden */
+/* at the start, the score submission is hidden */
 .submit-score {
     display:none;
 }
