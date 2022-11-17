@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 
-    <title>Do you know Dan?</title>
+    <title>Do you know Javascript?</title>
 </head>
 
 <body>
@@ -27,22 +27,21 @@
     and a big start button that will start the game -->
     <main>
         <!-- h1 will disappear once quiz starts -->
-        <h1>Welcome to My Quiz!</h1> 
+        <h1>Welcome to the JS Quiz!</h1> 
         <!-- h2 will filled with each quiz question -->
-        <h2 id="question">How well you really know Dan (me)?</h2>
+        <h2 id="question">How well you really know JavaScript?</h2>
         <!-- directions will disappear when quiz starts -->
-        <p id="instructions">Hi friends and Bootcamp graders! Welcome to the test that tests how much you really know about me.
-            This is a timed quiz. You have 1 minutes to answer as many multiple choice questions about my life as you can, wracking up points along the way. Correct answers are worth 5pts.
+        <p id="instructions">Hi everyone! Welcome to this Javascript Quiz. You have 30 seconds to answer as many multiple choice questions about Javascript as you can, wracking up points along the way. Correct answers are worth 5pts.
             If you answer a question incorrectly, you will lose 5 seconds on the clock, so try to be right!
-            Clicking the start button will begin the quiz and timer. Good luck! And I hope to see your name on the high score list!
+            Clicking the start button will begin the quiz and timer. Good luck!
         </p>
         <!-- answers -->
-        <ol class="answer-options">
-            <li class = "answers"><button id="a" data-correct="false"></button></li>
-            <li class = "answers"><button id="b" data-correct="false"></button></li>
-            <li class = "answers"><button id="c" data-correct="false"></button></li>
-            <li class = "answers"><button id="d" data-correct="false"></button></li>
-        </ol>
+        <ul class="answer-options">
+            <li><button class = "answers" id="a" data-correct="false"></button></li>
+            <li ><button class = "answers" id="b" data-correct="false"></button></li>
+            <li ><button class = "answers" id="c" data-correct="false"></button></li>
+            <li><button class = "answers" id="d" data-correct="false"></button></li>
+        </ul>
         <!-- Reports if answer is right or wrong -->
         <article id="grade-message"></article>
         <!-- button begins the quiz, but then will become the submit answer button -->
