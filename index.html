@@ -11,9 +11,7 @@
 </head>
 
 <body>
-    
     <!-- will include timer and current score -->
-    <!-- will only appear when the game begins -->
     <header>
         <ul>
             <!-- will dynamically add to these sections as the quiz progresses -->
@@ -22,9 +20,6 @@
         </ul>
     </header>
 
-    <!-- this will be the opening page -->
-    <!-- included will be instructions for how the game works
-    and a big start button that will start the game -->
     <main>
         <!-- h1 will disappear once quiz starts -->
         <h1>Welcome to the JS Quiz!</h1> 
@@ -46,7 +41,7 @@
         <article id="grade-message"></article>
         <!-- button begins the quiz, but then will become the submit answer button -->
         <button id="start-button" data-function="start">Start!</button>
-        
+        <!-- adds section for submitting the player's score -->
         <div class="submit-score">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" placeholder="Dan" />
