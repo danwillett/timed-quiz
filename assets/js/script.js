@@ -25,7 +25,7 @@ function randomAnswerIndex() {
 
 function beginQuiz() {
     // Sets interval in variable
-    secondsLeft = 3;
+    secondsLeft = 30;
     timeEl.textContent = secondsLeft;
     scoreEl.textContent = 0;
     giveQuestion(q, questionPool, questionOrder)
@@ -56,7 +56,8 @@ function beginQuiz() {
 function giveQuestion(q, qPool, qOrder) {
 
     // shows potential answers
-    answerBox.style.display = "contents";
+    answerBox.style.display = "flex";
+    questionEl.style.fontSize = "20px";
 
     console.log("question #: " + q)
     var currentQuestion = qPool.question[qOrder[q]];
@@ -124,18 +125,19 @@ function checkAnswer() {
         }
 
 
-
+        if (q + 1 == questionOrder.length) {
+            timeEl.textContent = 0;
+            clearInterval(timerInterval)
+            endGame()
+        } else {
         setTimeout(function () {
             q++
-            resultMessage.textContent = "";
-
-            if (q + 1 == questionOrder.length) {
-                endGame()
-            } else {
+            resultMessage.textContent = "";           
                 giveQuestion(q, questionPool, questionOrder)
-            }
+            
         }
-            , 500);
+            , 500); 
+        }
         return
     }, { once: true })
 
@@ -163,11 +165,11 @@ var resultMessage = document.getElementById("grade-message");
 // question pool: object with question key, and answer keys
 // question/answer combos will fill in the empty html spot when the quiz begins
 var questionPool = {
-    question: ["What's my birth month?", "What's my go to breakfast food?", "How many pets do I have?", "What's my favorite place?", "Favorite drink?", "Ideal temperature?"],
-    rightAnswer: ["November", "eggs", "0", "home", "Coffee", "70F"],
-    wrong1: ["January", "oatmeal", "2", "the beach", "Pepsi", "75F"],
-    wrong2: ["September", "smoothie/acai bowl", "1", "June Lake", "Water", "85F"],
-    wrong3: ["February", "PB toast with banana", "0.5", "Alaska", "Peppermint Tea", "65F"]
+    question: ["What's Javascript?", "What does JavaScript operate on?", "Why was Javascript designed?"],
+    rightAnswer: ["Scripting language", "Browser", "To add interactivity to HTML Pages"],
+    wrong1: ["An Application", "Server", "to style HTML pages"],
+    wrong2: ["A Machine", "ISP", "No purpose"],
+    wrong3: ["A website", "VS Code", "For educational purposes"]
 }
 
 // at start up of webpage, chooses a random order for questions to be picked through when quiz starts
@@ -187,7 +189,7 @@ beginButton.addEventListener("click", function (event) {
 
     // step 1: clear title screen
     h1El.textContent = "";
-    instructionsEl.textContent = "";
+    instructionsEl.remove();
     questionEl.textContent = "";
     beginButton.style.display = "none";
 
@@ -210,9 +212,9 @@ beginButton.addEventListener("click", function (event) {
 function endGame() {
 
     // remove unneccesary elements
-    questionEl.textContent = "";
+    questionEl.remove();
     answerBox.style.display = "none";
-    resultMessage.textContent = "";
+    resultMessage.remove();
 
     // add/unhide elements
     h1El.textContent = "Quiz Complete!"
@@ -220,7 +222,8 @@ function endGame() {
     h2El.textContent = "You scored: " + score;
 
     var submissionInstructions = document.createElement("p");
-    submissionInstructions.textContent = "Add your name to see how you rank on the leaderboard"
+    submissionInstructions.textContent = "Add your name to see how you rank on the leaderboard!"
+    submissionInstructions.style.padding = "10px 0px";
 
     var submitEl = document.querySelector(".submit-score");
 
@@ -237,6 +240,11 @@ function endGame() {
     submitButton.addEventListener("click", function(){
         var playerName = document.querySelector("#name").value;
         console.log(playerName)
+        if (playerName == "") {
+            // nothing happens if they click without their name inputted
+        console.log(playerName + "nada")
+        } else {
+        console.log(playerName)
         // local storage will have an object that stores past scores called quizScores
 
         if (localStorage.getItem("quizScores") === null) {
@@ -248,7 +256,7 @@ function endGame() {
           }
 
           quizScores[playerName] = score;
-        // if (localStorage.getItem()) Check if name exists first  
+         
         localStorage.setItem("quizScores", JSON.stringify(quizScores))
 
         // hide submission element
@@ -256,18 +264,17 @@ function endGame() {
 
         // present high scores
         showScores()
+        }
 
-    }, { once: true })
+    })//, { once: true })
 }
 
 function showScores() {
     var newQuizScores = JSON.parse(localStorage.getItem("quizScores"));
-    console.log(newQuizScores)
     // need to sort scores by highest to lowest
     var vals = Object.values(newQuizScores);
     var names = Object.keys(newQuizScores);
-    console.log("names: " +names)
-    console.log("vals: " +vals)
+
     var valSort = Object.values(newQuizScores).sort();
     console.log(valSort)
     const valSortLength = valSort.length;
@@ -277,21 +284,12 @@ function showScores() {
 
     // finds the location and name pair of where each sorted score is and places it in scoreList
     for (var i = 0; i < valSortLength; i++) {
-        console.log(i+ " - sorted value:" + valSort[i])
         var ind = vals.indexOf(valSort[i]);
-        console.log("vals index: " + ind)
-        
-        // console.log("vals -" + vals)
        
         // // console.log(ind)
         scoreList.push(names[ind] + ": " + vals[ind]);
         vals.splice(ind, 1);
         names.splice(ind, 1);
-
-        console.log("names: " +names)
-        console.log("vals: " +vals)
-        console.log("score list:"+  scoreList)
-
     }
 
     var leaderBoard = scoreList;
@@ -302,35 +300,14 @@ function showScores() {
     for (var i =0; i <leaderBoard.length; i++) {
         var rankEl = document.createElement('li');
         rankEl.textContent = leaderBoard[i];
+        rankEl.style.padding = "5px 0px";
+        rankEl.style.textAlign = "center";
         leaderBoardEl.appendChild(rankEl);
     }
 
-    // scoreBoard.style.display= "contents";
+    leaderBoardEl.style.border = "solid black 2px"
+    leaderBoardEl.style.backgroundColor = "yellow"
+
 
 
 }
-// function: change question
-    // randomly pulls from a question pull
-    // questions stored as objects
-
-// function: keep score
-    // stores points in local storage to be added to with each correct question
-
-
-
-// function: begin quiz
-// this will start the quiz timer, clear H1 & instructions, change
-// the question to a random question from question pool  
-// 
-// generate answers ul/li element
-// 
-// change button to submit, that when clicked will change the question, answers and potentially change timer
-
-// function: setInterval timer
-// triggered by clicking start button
-// count down by seconds from a seconds remaining button  
-// 
-// seconds remaining button however changes when a question is answer incorrectly,
-// subtracting the current value by 5 seconds
-// 
-// sends an alert when game is over somehow

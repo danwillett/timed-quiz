@@ -28,7 +28,6 @@ header li {
 
 
 main {
-    width: fit-content;
     padding: 5% 15%;
     display: flex;
     flex-direction: column;
@@ -65,7 +64,28 @@ h2 {
     margin: 0 auto;
 }
 
-.answer-options, .submit-score {
+.answer-options {
+    display:none;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    
+}
+
+
+.answers {
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+}
+.answers:hover {
+    filter: brightness(75%);
+}
+/* at the start, the score submission and answer options are hidden */
+.submit-score {
     display:none;
 }
+
+
 
