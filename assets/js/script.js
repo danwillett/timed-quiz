@@ -33,14 +33,20 @@ function beginQuiz() {
     timerInterval = setInterval(function () {
         secondsLeft--;
         console.log(secondsLeft)
-        timeEl.textContent = secondsLeft;
+        
         // checkAnswer();
 
         if (secondsLeft <= 0) {
+            secondsLeft = 0;
+            timeEl.textContent = secondsLeft;
             clearInterval(timerInterval)
-            endGame()
+            setTimeout(function(){endGame()}, 550) // timeout compensates for the delay when giving the next wuestion
             return
         }
+            timeEl.textContent = secondsLeft;
+        
+
+        
 
     }, 1000);
 
@@ -109,8 +115,8 @@ function checkAnswer() {
                 secondsLeft = secondsLeft - 5;
             } else {
                 secondsLeft = 0;
-                clearInterval(timerInterval)
-                endGame()
+                // clearInterval(timerInterval)
+                // endGame()
                 return
             }
             console.log(secondsLeft)
@@ -145,6 +151,7 @@ var instructionsEl = document.getElementById("instructions");
 var timeEl = document.getElementById("time");
 var scoreEl = document.getElementById("score");
 var answerBox = document.querySelector(".answer-options");
+var mainSec = document.body.children[1];
 
 var answerA = document.getElementById("a");
 var answerB = document.getElementById("b");
@@ -213,9 +220,8 @@ function endGame() {
     h2El.textContent = "You scored: " + score;
 
     var submissionInstructions = document.createElement("p");
-    submissionInstructions.textContent = "If you would like to add your score to the leader board, submit your name below."
+    submissionInstructions.textContent = "Add your name to see how you rank on the leaderboard"
 
-    var mainSec = document.body.children[1];
     var submitEl = document.querySelector(".submit-score");
 
     mainSec.appendChild(h2El);
@@ -254,12 +260,53 @@ function endGame() {
     }, { once: true })
 }
 
-// function showScores() {
-//     var newQuizScores = JSON.parse(localStorage.getItem("quizScores"));
-//     // need to sort scores by highest to lowest
-//     var vals = Object.values(newQuizScores)
-//     var keys = Object.keys(newQuizScores)
-//     for (i = 0; i < keys.length; i++)
+function showScores() {
+    var newQuizScores = JSON.parse(localStorage.getItem("quizScores"));
+    console.log(newQuizScores)
+    // need to sort scores by highest to lowest
+    var vals = Object.values(newQuizScores);
+    var names = Object.keys(newQuizScores);
+    console.log("names: " +names)
+    console.log("vals: " +vals)
+    var valSort = Object.values(newQuizScores).sort();
+    console.log(valSort)
+    const valSortLength = valSort.length;
+
+
+    var scoreList = [];
+
+    // finds the location and name pair of where each sorted score is and places it in scoreList
+    for (var i = 0; i < valSortLength; i++) {
+        console.log(i+ " - sorted value:" + valSort[i])
+        var ind = vals.indexOf(valSort[i]);
+        console.log("vals index: " + ind)
+        
+        // console.log("vals -" + vals)
+       
+        // // console.log(ind)
+        scoreList.push(names[ind] + ": " + vals[ind]);
+        vals.splice(ind, 1);
+        names.splice(ind, 1);
+
+        console.log("names: " +names)
+        console.log("vals: " +vals)
+        console.log("score list:"+  scoreList)
+
+    }
+
+    var leaderBoard = scoreList;
+    console.log(scoreList.reverse())
+    var leaderBoardEl = document.createElement('ol');
+    // leaderBoardEl.addAttribute();
+    mainSec.appendChild(leaderBoardEl);
+    for (var i =0; i <leaderBoard.length; i++) {
+        var rankEl = document.createElement('li');
+        rankEl.textContent = leaderBoard[i];
+        leaderBoardEl.appendChild(rankEl);
+    }
+
+    // scoreBoard.style.display= "contents";
+
 
 }
 // function: change question
